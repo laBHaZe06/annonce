@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% form_theme form with ['bootstrap_4_layout.html.twig'] %}
+{% block title %}Modification du profil{% endblock %}
+
+{% block body %}
+
+<div class = "container col-md-9 mt-3">
+            <h1>Modification du profil</h1>
+            <p>{{ 'Prenom : '  ~ user.firstName ~  '' }} , {{ 'Nom : '  ~ user.lastName ~  '' }}</p><br><br>
+       
+
+{#ici j'applique le design bootstrap que a ce formulaire#}
+{{ form_start(form) }} {#variable "form" defini ds Adcontroller.php #}
+
+
+{{form_row(form.email,{'label': false,'attr': {'placeholder':"Entrer votre email"}})}}
+{{form_row(form.picture,{'label': false,'attr': {'placeholder':"Entrer une url (avatar)"}})}}
+<br>
+{{form_row(form.introduction,{'label': false,'attr': {'placeholder':"Mettez une introduction"}})}}
+{{form_row(form.description,{'label': false,'attr': {'placeholder':"Mettez votre description"}})}}
+<br>
+
+<button type="submit"class="btn btn-warning mt-3">Modifier</button>
+
+{{ form_end(form) }}
+
+
+
+ </div>
+
+
+{% endblock %} 

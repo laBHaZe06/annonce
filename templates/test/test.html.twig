@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello TestController!{% endblock %}
+
+{% block body %}
+{% set variable = 'eric' %}
+
+{{variable}}
+
+{% for compteur in 0..10 %}
+{{compteur}}
+{% endfor %}
+
+{{ variable | raw}}
+
+
+{% set items = { 'apple': 'fruit', 'orange': 'fruit', 'peugeot': 'unknown' } %}
+
+{% set items = items|merge({ 'peugeot': 'car', 'renault': 'car' }) %}
+
+{{dump(items)}}
+{% endblock %}

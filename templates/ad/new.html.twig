@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+{% form_theme form with ['bootstrap_4_layout.html.twig',_self] %}
+{% block title %} Création de l'annonce{% endblock %}
+
+{% block body %}
+
+<div class = "container col-md-9 mt-3">
+            <h1>Création annonce</h1>
+
+{#ici j'applique le design bootstrap que a ce formulaire#}
+{{ form_start(form) }} {#variable "form" defini ds Adcontroller.php #}
+
+  {#{{ form_errors(form.title)}}#}
+{{form_row(form.title,{'label': false,'attr': {'placeholder':"Entrer le titre"}})}}
+  {#{{ form_errors(form.coverImage)}} #}
+{{form_row(form.coverImage,{'label': false,'attr': {'placeholder':"Entrer une url"}})}}
+{{form_row(form.introduction,{'label': false,'attr': {'placeholder':"Entrer l'introduction"}})}}
+{{form_row(form.content,{'label': false,'attr': {'placeholder':"Entrer un contenu"}})}}
+{{form_row(form.rooms,{'label': false,'attr': {'placeholder':"Entrer le nombre de chambre(s)",'min':1}})}}
+{{form_row(form.price,{'label': false,'attr': {'placeholder':"Entrer un prix"}})}}
+
+{{form_row(form.images)}}
+<button type="button" id="add_image" class="btn btn-warning">Ajouter image</button><br>
+{{form_row(form.file)}}
+<button type="submit"class="btn btn-success mt-3">Créer une annonce</button>
+
+{{ form_end(form) }}
+
+
+
+ </div>
+
+
+{% endblock %} 
+
+{% block _annonce_images_entry_row %}     {#recuperation de l'id via F12#}
+ {#  {{dump(form)}}  #}
+ <div class="row" id="{{id}}">
+      <div class="col">
+      {#{{ form_errors(form.url)}}#}
+      {{form_row(form.url,{'label': false, 'attr': {'placeholder': 'Entrer une image'}})}}
+       </div>
+       <div class="col">
+       {{form_row(form.caption,{'label': false, 'attr': {'placeholder': 'Entrer une légende'}})}}
+       </div>
+       <div class="col-2">
+       <button type="button" class="btn btn-danger del_image" data-bloc="{{id}}">X</button>
+       </div>
+
+</div>
+
+ {% endblock %}{#block qui extrait le form des images pour changer le squelette#}
+
+   {% block javascripts %}
+   
+   <script type="text/javascript" src="/js/ad.js"></script>
+  
+   {% endblock %}

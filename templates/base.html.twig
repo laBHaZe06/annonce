@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+     <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179022317-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-179022317-1');
+  </script>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="description" content="Projet web-site web concernant des annonces d'appartement ou maison en location pour les vacances-réalisé en Symfony 4 - style AirBnB -">
+        <meta name="Keywords" content="annonces location appartement maison vacances">
+        <meta name="Subject" content="projet web">
+        <meta name="Copyright" content="web-bydesign">
+        <meta name="Author" content="borne yoan">
+
+        <link rel="stylesheet" type="text/css"href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+        <link rel="stylesheet" type="text/css"href="/css/style.css">
+       
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    {% include '_partials/_header.html.twig' %}
+        {% block body %}{% endblock %}
+
+        {% block monbloc %} {% endblock %}
+
+        {% include '_partials/_footer.html.twig' %}
+
+
+        <script type="text/javascript" src="/js/jquery-3.5.1.slim.min.js"></script>
+        <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="/js/popper.min.js"></script>
+        
+        {% block javascripts %}{% endblock %}
+   
+    </body>
+</html>

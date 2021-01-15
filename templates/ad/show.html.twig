@@ -1,0 +1,112 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Annonces : {{ad.title}}{% endblock %}
+
+{% block body %}
+
+
+    <div class = "container text-center">
+
+    {% set fusionimages = ad.images|merge(ad.imageUploads) %}
+    {#on fusionne les 2 tableau de l'objet--les entité se retrouve ds un seul tableau-voir en dump#}
+
+    
+        <h1 class="text-success">{{ad.title}}</h1><br>
+    
+            <div class="row mb-3">
+
+                <div class="row mb-3">
+                    <div class="col-12-md">
+
+                        {{ad.rooms}} pièces à {{ad.price}} €/jour<br>
+                        Pas encore noté<br>
+
+                        <a href="" class="btn btn-info mt-3 mb-3">Réserver</a>
+
+                          <a href="{{path('ads_edit',{'slug':ad.slug})}}" class="btn btn-info mt-3 mb-3">Modifier l'annonce</a>
+                           
+                           <a href="{{path('ads_delete',{'slug':ad.slug})}}" class="btn btn-danger mt-3 mb-3" onclick="return confirm('Etes-vous sur de supprimer l\'annonce ?')">Supprimer</a>
+                       {% for img in ad.imageUploads %}
+                        {% if loop.first %}
+                        <img src="{{img.url}}"style="height: 250px;display:block;"> {#permet de recuperer la premiere img telechager et la mettre ds le cover img#}
+                        {% endif %}
+
+                        {% endfor %}
+                        <p class="text-success mt-3 mb-3">{{ad.content|striptags('<br><b><i>')|raw}}</p>
+
+                        <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
+                        
+                       
+                        
+                        
+                      {#{{dump(ad.images)}}#}
+
+
+                        
+                            {#########Début carousel ########}
+                        <div id="carouselExampleCaptions" class="carousel slide carousel" data-ride="carousel">
+                                    <ol class="carousel-indicators">
+                                        {% for image in fusionimages %}
+                                        
+                                        <li data-target="#carouselExampleCaptions" data-slide-to="{{loop.index0}}"{% if loop.first  %} class="active"{% endif %}></li>
+                                        {% endfor %}
+                                    </ol>
+                            <div class="carousel-inner">
+                                {% for image in fusionimages %}
+                                   <div class="carousel-item {% if loop.first %} active {% endif %}">
+                                     <img src="{{image.url}}" class="d-block w-100" alt="">
+                                       <div class="carousel-caption d-none d-md-block">
+                                            <h5>{{ad.title}}</h5>
+                                            <p>{{image.caption is not defined ? image.name:image.caption}}
+                                            
+                                       </div>
+                                   </div>
+                             {% endfor %}
+                          </div>
+                            <a class="carousel-control-prev" href="#carouselExampleCaptions" role="button" data-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleCaptions" role="button" data-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                    
+                        </div><br><br>
+               
+                             {#########   Fin carousel ########}
+                        
+                    
+
+                     <div class="col-8 mt-3 ">
+                         <div class="row">
+                             <div class="col-6">
+                               <img src="{{ad.author.picture}}">
+
+                             </div>
+
+                              <div class="col-6">
+                                  <a href="{{path('user_show', {'slug' : ad.author.slug})}}">{{ad.author.firstName}} {{ad.author.lastName}}</a><br>
+
+                                  <span class="badge badge-success">{{ad.author.ads|length }} annonce(s)</span>
+
+
+                              </div>
+
+
+                        </div>
+
+                        <div class="row-md col-6">
+                            {{ad.author.introduction}}
+                            </div>
+
+                        
+                     </div>
+
+                        
+
+
+            </div>
+    </div>
+
+{% endblock %}

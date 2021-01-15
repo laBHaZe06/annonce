@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+
+{% block title %}Le Compte {% endblock %}
+
+
+
+
+{% block body %}
+
+        <div class="container mt-3">
+{#  {{dump(user)}} #}
+
+               <h1>COMPTE</h1>
+       
+
+                <h3>{{'Compte appartenant a : ' ~ user.firstName ~ ' ' ~ user.lastName ~ ' '}}</h3><br>
+
+            <span class="badge badge-primary">Photo profil : <img src="{{user.picture}}"></span><br><br><br>
+
+            <span class="badge badge-success">Il y a actuellement  : {{user.ads | length}} annonce(s)</span><br><br>
+
+
+
+{% if (user.ads | length ) > 0 %}  {# on affiche les ad que si elle existe#}
+     
+    {% for ad in user.ads %}
+                                    
+          <div class="col-md-6 mt-4">
+                  {#recuperer chaque objet  {{dump(ad)}}#}
+                <div class="card text-center text-dark bg-light mb-3">
+                    <div class="card-header">
+                        {{ad.rooms}}  {# appel du getter  #}
+                        chambres {{ad.price}} €/nuit<br>
+                        Pas encore noté
+                    </div>
+                    
+                    <div class="card-body text-dark bg-light mb-3">                      
+                     
+                        <h5 class="card-title mt-2">{{ad.title}}</h5>
+                            <p class="card-text">{{ad.introduction|striptags('<i><b><br>')|raw}}</p>  {#raw sert a traité tte les balise mais twig moins protégé, preferer striptags en choisissant la balise#}
+                            <a href="{{path('ads_show',{'slug': ad.slug})}}" class="btn btn-success">En savoir plus</a>
+                    </div>
+                
+            
+            </div>
+        </div>
+
+    {% endfor %}
+
+{% else %}
+      
+      
+      <div class="row">
+      <div class="alert alert-warning">Il n' y a pas d'annonces enregistrés</div>
+      
+
+      </div>
+
+
+
+{% endif %}
+
+    {% if (user is same as (app.user)) %}  
+                
+                <a href="{{path('account_profil')}}" class="btn btn-warning mt-3 mb-3">Modifier mon compte</a><br>
+                <a href="{{path('account_password')}}" class="btn btn-warning mt-3 mb-3">Modifier le mot de passe</a><br>
+
+    {% endif %}    
+      
+        
+        </div>
+        
+
+
+        {% endblock %}
